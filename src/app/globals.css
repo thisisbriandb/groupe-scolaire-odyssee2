@@ -1,0 +1,263 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Palette simplifiée : bleu léger, blanc, jaune */
+  --primary: #4F8FF9; /* Bleu léger principal */
+  --primary-light: #B3D1FF; /* Bleu très clair pour les fonds */
+  --primary-dark: #2563C6; /* Bleu un peu plus soutenu pour contraste */
+  
+  /* Accent jaune */
+  --accent-yellow: #FFD600; /* Jaune lumineux pour les accents */
+  
+  /* Textes */
+  --text-primary: #223F7B; /* Bleu léger pour les titres et textes principaux */
+  --text-secondary: #2563C6; /* Bleu un peu plus foncé pour les sous-titres */
+  --text-light: #FFFFFF; /* Blanc pour les textes sur fond bleu */
+  
+  /* Arrière-plans */
+  --background: #FFFFFF; /* Blanc pur */
+  --background-alt: #F5FAFF; /* Bleu très pâle pour alternance */
+  --background-dark: #4F8FF9; /* Bleu léger pour sections colorées */
+  --background-gradient-start: #B3D1FF; /* Dégradé bleu très clair */
+  --background-gradient-end: #4F8FF9; /* Dégradé bleu léger */
+  
+  /* Cartes et composants */
+  --background-card: #FFFFFF;
+  --background-card-hover: #F5FAFF;
+  --border-color: #E3EFFF; /* Bleu très clair pour les bordures */
+
+  /* États */
+  --success: #FFD600; /* Utilisation du jaune pour succès/alertes */
+  --warning: #FFD600;
+  --error: #FFD600; /* Pas de rouge, on reste sur le jaune pour cohérence visuelle */
+  --error: #E72A24;
+}
+
+/* Reset et fix pour le scroll horizontal */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  position: relative;
+  width: 100%;
+  font-family: 'Work Sans', sans-serif;
+  color: var(--text-primary);
+  background-color: var(--background);
+  @apply antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Oswald', sans-serif;
+  color: var(--text-primary);
+}
+
+/* Classes utilitaires personnalisées */
+@layer components {
+  .container {
+    @apply relative mx-auto px-4;
+    max-width: min(100%, 1280px);
+  }
+
+  .section-dark {
+    background: linear-gradient(to bottom, var(--background-gradient-start), var(--background-gradient-end));
+    color: var(--text-light);
+  }
+
+  .section-light {
+    background-color: var(--background-alt);
+    color: var(--text-primary);
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold transition-all duration-300;
+    white-space: nowrap;
+  }
+
+  .btn-primary {
+    background-color: var(--accent-red);
+    color: var(--text-light);
+  }
+
+  .btn-primary:hover {
+    background-color: #D4241E;
+  }
+
+  .btn-outline {
+    @apply border-2;
+    color: var(--text-light);
+    border-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(4px);
+  }
+
+  .btn-outline:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+
+  .btn-accent {
+    background-color: var(--accent-bordeaux);
+    color: var(--text-light);
+  }
+
+  .btn-accent:hover {
+    background-color: #8A2F4A;
+  }
+
+  .btn-success {
+    background-color: var(--accent-green);
+    color: var(--text-light);
+  }
+
+  .btn-success:hover {
+    background-color: #2E7D32;
+  }
+
+  .btn-warning {
+    background-color: var(--accent-yellow);
+    color: var(--text-primary);
+  }
+
+  .btn-warning:hover {
+    background-color: #F57F17;
+  }
+
+  .card {
+    background-color: var(--background-card);
+    border: 1px solid var(--border-color);
+    @apply rounded-xl shadow-lg hover:shadow-xl transition-all duration-300;
+  }
+
+  .card:hover {
+    background-color: var(--background-card-hover);
+  }
+
+  .text-hero {
+    color: var(--text-light);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .text-hero-secondary {
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .section-title {
+    @apply font-oswald text-4xl sm:text-5xl font-bold;
+    color: var(--text-primary);
+  }
+
+  .section-subtitle {
+    @apply font-work-sans text-lg text-gray-600;
+  }
+}
+
+/* Animations personnalisées */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Styles pour Swiper améliorés */
+.swiper-fade.swiper-free-mode .swiper-slide {
+  transition-timing-function: ease-out;
+}
+
+.swiper-fade .swiper-slide {
+  pointer-events: none;
+  transition-property: opacity;
+  transition-duration: 800ms;
+}
+
+.swiper-fade .swiper-slide-active {
+  pointer-events: auto;
+}
+
+.swiper-slide-active .scale-up {
+  transform: scale(1.1);
+  transition: transform 8s ease-out;
+}
+
+/* Styles de scrollbar personnalisés */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-dark);
+}
+
+/* Styles de sélection de texte */
+::selection {
+  background: var(--primary);
+  color: var(--text-light);
+}
+
+/* Styles personnalisés pour Swiper */
+.swiper-pagination {
+  position: absolute !important;
+  bottom: 2rem !important;
+  top: auto !important;
+  width: 20rem !important;
+  right: 0 !important;
+  left: auto !important;
+  margin: 0 auto !important;
+  background: #f3f4f6 !important;
+  border-radius: 9999px !important;
+  padding: 0.5rem !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+}
+
+.swiper-pagination-bullet {
+  width: 0.75rem !important;
+  height: 0.75rem !important;
+  background: #d1d5db !important;
+  border-radius: 50% !important;
+  opacity: 1 !important;
+  transition: all 0.3s ease !important;
+  cursor: pointer !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #E72A24 !important;
+  transform: scale(1.2) !important;
+}
+
+.swiper-pagination-bullet:hover {
+  background: #E72A24 !important;
+  transform: scale(1.1) !important;
+}
+
+/* Responsive pour la pagination */
+@media (max-width: 768px) {
+  .swiper-pagination {
+    width: 15rem !important;
+    bottom: 1rem !important;
+  }
+}
